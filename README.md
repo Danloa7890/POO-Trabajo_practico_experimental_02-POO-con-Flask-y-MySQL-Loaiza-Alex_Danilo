@@ -1,42 +1,33 @@
-# Caso de Estudio POO con Flask y MySQL (sin ORM)
+# Caso de Estudio POO — Sistema de Reservas de Laboratorio
 
 Este proyecto implementa un sistema de gestión de reservas de laboratorios universitarias utilizando una arquitectura en capas con principios SOLID en Python y una base de datos MySQL sin ORM.
 
-## Requisitos
-- Python 3.12+ o 3.13
-- MySQL Server
 
-## Instrucciones de Instalación y Ejecución
+## Estructura del Proyecto
 
-1. **Crear y activar el entorno virtual**:
-   ```bash
-   py -m venv .venv
-   .\.venv\Scripts\activate
-   ```
-2. **Instalar dependencias**:
-   ```bash
-   pip install -r requirements.txt
-   ```
-3. **Configurar el archivo `.env`**:
-   Crear un archivo `.env` en la raíz con las credenciales de tu base de datos local:
-   ```env
-   DB_HOST=localhost
-   DB_PORT=3306
-   DB_USER=root
-   DB_PASSWORD=tu_contraseña
-   DB_NAME=local_reservas_db
-   FLASK_ENV=development
-   ```
-4. **Inicializar y Sembrar la Base de Datos**:
-   Ejecuta el script de inicialización automática en Python:
-   ```bash
-   python setup_db.py
-   ```
-5. **Ejecutar la API REST**:
-   ```bash
-   python run.py
-   ```
-6. **Ejecutar pruebas**:
-   ```bash
-   python test_api.py
-   ```
+```text
+proyecto/
+├── app/
+│   ├── __init__.py                         ← Bootstrap: inicializa Flask y dependencias
+│   ├── api/
+│   │   ├── __init__.py                     ← (vacío)
+│   │   └── reserva_controller.py           ← Capa de interfaz REST (HTTP)
+│   ├── domain/
+│   │   ├── __init__.py                     ← (vacío)
+│   │   ├── entities.py                     ← Entidades y objetos de valor
+│   │   ├── exceptions.py                   ← Excepciones de dominio
+│   │   └── repository.py                   ← Interfaz abstracta del repositorio
+│   ├── infrastructure/
+│   │   ├── __init__.py                     ← (vacío)
+│   │   ├── db_pool.py                      ← Pool de conexiones MySQL
+│   │   ├── reserva_dao.py                  ← Acceso a datos (SQL puro)
+│   │   └── mysql_reserva_repository.py     ← Implementación del repositorio
+│   └── application/
+│       ├── __init__.py                     ← (vacío)
+│       └── reserva_service.py              ← Casos de uso / lógica de aplicación
+├── .env                                    ← Variables de entorno (no subir)
+├── .gitignore
+├── requirements.txt
+├── schema.sql                              ← DDL de la base de datos
+└── run.py                                  ← Punto de entrada de la aplicación
+```
